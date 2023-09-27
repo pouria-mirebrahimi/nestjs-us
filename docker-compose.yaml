@@ -1,0 +1,17 @@
+services:
+  main:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      target: development
+    command: ./docker-entrypoint
+    ports:
+      - '3001:3001'
+    volumes:
+      - .:/usr/src/app
+  mssql:
+    build:
+      context: .
+      dockerfile: ./src/database/mssql/Dockerfile
+    ports:
+      - '1433:1433'

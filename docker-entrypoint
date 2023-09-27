@@ -1,0 +1,13 @@
+#!/bin/sh
+
+echo "Waiting for the MSSql"
+./wait-for mssql:1433 -t 1000
+
+echo "Waiting more for initializing the MSSql"
+sleep 60
+
+echo "Creating the main database if not exist"
+yarn db:create -d dist/database/data-source.service.js
+
+echo "Starting the application up..."
+yarn dev
